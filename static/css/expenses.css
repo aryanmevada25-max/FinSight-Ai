@@ -1,0 +1,129 @@
+.expenses-page {
+    min-height: 100%;
+    background: #f4f7fb;
+}
+
+.expenses-page .card:hover {
+    transform: none;
+}
+
+.page-eyebrow {
+    color: #2563eb;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.expense-summary-card,
+.filter-card,
+.expense-list-card,
+.expense-form-card {
+    border-radius: 1rem;
+}
+
+.expense-summary-card {
+    color: #fff;
+    background: linear-gradient(135deg, #7f1d1d, #dc2626);
+}
+
+.expense-summary-card .text-body-secondary {
+    color: rgba(255, 255, 255, .72) !important;
+}
+
+.summary-icon,
+.empty-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: .8rem;
+}
+
+.summary-icon {
+    color: #fee2e2;
+    background: rgba(255, 255, 255, .14);
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.filter-card .form-label,
+.expense-form-card .form-label {
+    color: #475569;
+    font-size: .84rem;
+    font-weight: 650;
+}
+
+.filter-card .form-control,
+.filter-card .form-select,
+.expense-form-card .form-control,
+.expense-form-card .form-select,
+.expense-form-card .input-group-text {
+    min-height: 46px;
+}
+
+.expense-list-card {
+    overflow: hidden;
+}
+
+.expense-list-card .table > :not(caption) > * > * {
+    padding: 1rem 1.5rem;
+}
+
+.expense-list-card thead th {
+    color: #64748b;
+    border-color: #e2e8f0;
+    background: #f8fafc;
+    font-size: .75rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.description-cell {
+    min-width: 180px;
+    max-width: 360px;
+    overflow-wrap: anywhere;
+}
+
+.category-badge {
+    display: inline-flex;
+    padding: .35rem .65rem;
+    color: #1d4ed8;
+    border-radius: 999px;
+    background: #dbeafe;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.expense-empty-state {
+    border-top: 1px solid #edf2f7;
+}
+
+.empty-icon {
+    color: #2563eb;
+    background: #dbeafe;
+    font-size: 1.35rem;
+}
+
+.expense-form-card {
+    max-width: 760px;
+}
+
+.back-link {
+    color: #475569;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: #1d4ed8;
+}
+
+@media (max-width: 575.98px) {
+    .expense-list-card .table > :not(caption) > * > * {
+        padding: .85rem 1rem;
+    }
+}

@@ -1,0 +1,77 @@
+.budget-page {
+    min-height: 100%;
+    background: #f4f7fb;
+}
+
+.budget-page .card:hover {
+    transform: none;
+}
+
+.budget-page .page-eyebrow {
+    color: #c2410c;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.budget-form-card,
+.budget-progress-card {
+    border-radius: 1rem;
+}
+
+.budget-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    color: #c2410c;
+    border-radius: .85rem;
+    background: #ffedd5;
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.budget-form-card .form-label {
+    color: #475569;
+    font-size: .84rem;
+    font-weight: 650;
+}
+
+.budget-form-card .form-control,
+.budget-form-card .input-group-text {
+    min-height: 48px;
+}
+
+.metric-box {
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: .9rem;
+    background: #f8fafc;
+}
+
+.metric-box span {
+    display: block;
+    margin-bottom: .35rem;
+    color: #64748b;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.metric-box strong {
+    color: #0f172a;
+    font-size: 1.15rem;
+}
+
+.budget-progress {
+    height: .7rem;
+    background: #e2e8f0;
+}
+
+.budget-progress .progress-bar {
+    background: linear-gradient(90deg, #fb923c, #ea580c);
+}

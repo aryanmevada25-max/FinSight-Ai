@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050816">
+    <meta name="description" content="FinSight AI — intelligent personal finance, beautifully clear.">
+    <title>FinSight AI</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/finsight-ai-logo.png') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    {% for file in vite_css %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='dist/' ~ file) }}">
+    {% endfor %}
+</head>
+<body>
+    <div id="root"></div>
+    <script>window.__FINSIGHT__ = {{ bootstrap|tojson }};</script>
+    <script type="module" src="{{ url_for('static', filename='dist/' ~ vite_js) }}"></script>
+</body>
+</html>

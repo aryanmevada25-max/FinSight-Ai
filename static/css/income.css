@@ -1,0 +1,123 @@
+.income-page {
+    min-height: 100%;
+    background: #f4f7fb;
+}
+
+.income-page .card:hover {
+    transform: none;
+}
+
+.income-page .page-eyebrow {
+    color: #15803d;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.income-summary-card,
+.income-list-card,
+.income-form-card {
+    border-radius: 1rem;
+}
+
+.income-summary-card {
+    color: #fff;
+    background:
+        radial-gradient(circle at 90% 20%, rgba(255, 255, 255, .16), transparent 26%),
+        linear-gradient(135deg, #14532d, #16a34a);
+}
+
+.summary-icon,
+.empty-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: .85rem;
+}
+
+.summary-icon {
+    color: #dcfce7;
+    background: rgba(255, 255, 255, .14);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.income-list-card {
+    overflow: hidden;
+}
+
+.income-list-card .table > :not(caption) > * > * {
+    padding: 1rem 1.5rem;
+}
+
+.income-list-card thead th {
+    color: #64748b;
+    border-color: #e2e8f0;
+    background: #f8fafc;
+    font-size: .75rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.source-badge {
+    display: inline-flex;
+    padding: .35rem .65rem;
+    color: #166534;
+    border-radius: 999px;
+    background: #dcfce7;
+    font-size: .78rem;
+    font-weight: 700;
+}
+
+.description-cell {
+    min-width: 180px;
+    max-width: 360px;
+    overflow-wrap: anywhere;
+}
+
+.income-empty-state {
+    border-top: 1px solid #edf2f7;
+}
+
+.empty-icon {
+    color: #15803d;
+    background: #dcfce7;
+    font-size: 1.35rem;
+}
+
+.income-form-card {
+    max-width: 760px;
+}
+
+.income-form-card .form-label {
+    color: #475569;
+    font-size: .84rem;
+    font-weight: 650;
+}
+
+.income-form-card .form-control,
+.income-form-card .form-select,
+.income-form-card .input-group-text {
+    min-height: 46px;
+}
+
+.back-link {
+    color: #475569;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: #15803d;
+}
+
+@media (max-width: 575.98px) {
+    .income-list-card .table > :not(caption) > * > * {
+        padding: .85rem 1rem;
+    }
+}

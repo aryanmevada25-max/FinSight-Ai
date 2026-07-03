@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Register | FinSight AI{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="auth-section py-5">
+    <div class="container">
+        <div class="auth-card card shadow-sm mx-auto">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <h1 class="h3 fw-bold">Create your account</h1>
+                    <p class="text-body-secondary mb-0">Start building a clearer financial picture.</p>
+                </div>
+
+                <form method="post" action="{{ url_for('auth.register') }}" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ form.name.label(class="form-label") }}
+                        {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), autocomplete="name") }}
+                        {% for error in form.name.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.email.label(class="form-label") }}
+                        {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), autocomplete="email", placeholder="you@example.com") }}
+                        {% for error in form.email.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.password.label(class="form-label") }}
+                        {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""), autocomplete="new-password", aria_describedby="passwordHelp") }}
+                        <div id="passwordHelp" class="form-text">Use at least 8 characters.</div>
+                        {% for error in form.password.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="mb-4">
+                        {{ form.confirm_password.label(class="form-label") }}
+                        {{ form.confirm_password(class="form-control" + (" is-invalid" if form.confirm_password.errors else ""), autocomplete="new-password") }}
+                        {% for error in form.confirm_password.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {{ form.submit(class="btn btn-success w-100 py-2") }}
+                </form>
+
+                <p class="text-center text-body-secondary mt-4 mb-0">
+                    Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

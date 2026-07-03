@@ -1,0 +1,119 @@
+{
+  "_AreaChart-BMjmMcAA.js": {
+    "file": "assets/AreaChart-BMjmMcAA.js",
+    "name": "AreaChart",
+    "imports": [
+      "src/main.jsx"
+    ]
+  },
+  "_arrow-up-right-Dbk0djr1.js": {
+    "file": "assets/arrow-up-right-Dbk0djr1.js",
+    "name": "arrow-up-right",
+    "imports": [
+      "src/main.jsx"
+    ]
+  },
+  "_circle-check-BPA7nHzG.js": {
+    "file": "assets/circle-check-BPA7nHzG.js",
+    "name": "circle-check",
+    "imports": [
+      "src/main.jsx"
+    ]
+  },
+  "_shield-check-BovXqVeE.js": {
+    "file": "assets/shield-check-BovXqVeE.js",
+    "name": "shield-check",
+    "imports": [
+      "src/main.jsx"
+    ]
+  },
+  "src/main.jsx": {
+    "file": "assets/main-B2m7QzYb.js",
+    "name": "main",
+    "src": "src/main.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/pages/Auth.jsx",
+      "src/pages/Dashboard.jsx",
+      "src/pages/Transactions.jsx",
+      "src/pages/Budget.jsx",
+      "src/pages/Reports.jsx",
+      "src/pages/Advisor.jsx",
+      "src/pages/Profile.jsx"
+    ],
+    "css": [
+      "assets/main-BsRRcA0A.css"
+    ]
+  },
+  "src/pages/Advisor.jsx": {
+    "file": "assets/Advisor-CF6bedV-.js",
+    "name": "Advisor",
+    "src": "src/pages/Advisor.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/main.jsx",
+      "_shield-check-BovXqVeE.js"
+    ]
+  },
+  "src/pages/Auth.jsx": {
+    "file": "assets/Auth-9pDFwe-b.js",
+    "name": "Auth",
+    "src": "src/pages/Auth.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/main.jsx"
+    ]
+  },
+  "src/pages/Budget.jsx": {
+    "file": "assets/Budget-DTCqXreQ.js",
+    "name": "Budget",
+    "src": "src/pages/Budget.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/main.jsx",
+      "_circle-check-BPA7nHzG.js"
+    ]
+  },
+  "src/pages/Dashboard.jsx": {
+    "file": "assets/Dashboard-BguG3iwH.js",
+    "name": "Dashboard",
+    "src": "src/pages/Dashboard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/main.jsx",
+      "_AreaChart-BMjmMcAA.js",
+      "_arrow-up-right-Dbk0djr1.js"
+    ]
+  },
+  "src/pages/Profile.jsx": {
+    "file": "assets/Profile-DZBPLBJA.js",
+    "name": "Profile",
+    "src": "src/pages/Profile.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/main.jsx",
+      "_shield-check-BovXqVeE.js",
+      "_circle-check-BPA7nHzG.js"
+    ]
+  },
+  "src/pages/Reports.jsx": {
+    "file": "assets/Reports-HnDiOXPP.js",
+    "name": "Reports",
+    "src": "src/pages/Reports.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/main.jsx",
+      "_AreaChart-BMjmMcAA.js"
+    ]
+  },
+  "src/pages/Transactions.jsx": {
+    "file": "assets/Transactions--9xy2oGC.js",
+    "name": "Transactions",
+    "src": "src/pages/Transactions.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/main.jsx",
+      "_arrow-up-right-Dbk0djr1.js"
+    ]
+  }
+}

@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | FinSight AI{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-page py-4 py-lg-5">
+    <div class="container">
+        <section class="welcome-panel p-4 p-lg-5 mb-4" aria-labelledby="dashboard-heading">
+            <div class="row align-items-center g-3">
+                <div class="col-lg-8">
+                    <p class="welcome-eyebrow mb-2">Personal finance overview</p>
+                    <h1 class="display-6 fw-bold mb-2" id="dashboard-heading">
+                        Welcome back, {{ current_user.name }}
+                    </h1>
+                    <p class="mb-0 text-white-50">
+                        Here is your financial snapshot. Your figures will update as you add transactions.
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <div class="date-badge d-inline-flex align-items-center gap-2">
+                        <span aria-hidden="true">●</span>
+                        <time datetime="{{ current_date_iso }}">{{ current_date }}</time>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-4" aria-labelledby="summary-heading">
+            <div class="d-flex align-items-end justify-content-between mb-3">
+                <div>
+                    <p class="section-kicker mb-1">Quick summary</p>
+                    <h2 class="h4 mb-0" id="summary-heading">Your numbers at a glance</h2>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-5 g-3">
+                <div class="col">
+                    <article class="card stat-card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="stat-icon balance-icon" aria-hidden="true">₹</div>
+                            <p class="stat-label">Current Balance</p>
+                            <p class="stat-value mb-0">{{ dashboard_data.balance }}</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="card stat-card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="stat-icon income-icon" aria-hidden="true">↑</div>
+                            <p class="stat-label">Total Income</p>
+                            <p class="stat-value mb-0">{{ dashboard_data.income }}</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="card stat-card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="stat-icon expense-icon" aria-hidden="true">↓</div>
+                            <p class="stat-label">Total Expenses</p>
+                            <p class="stat-value mb-0">{{ dashboard_data.expenses }}</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="card stat-card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="stat-icon savings-icon" aria-hidden="true">◆</div>
+                            <p class="stat-label">Monthly Savings</p>
+                            <p class="stat-value mb-0">{{ dashboard_data.savings }}</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="card stat-card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="stat-icon budget-icon" aria-hidden="true">%</div>
+                            <p class="stat-label">Budget Progress</p>
+                            <p class="stat-value mb-2">{{ dashboard_data.budget_spent }}</p>
+                            <small class="text-body-secondary d-block mb-2">
+                                of {{ dashboard_data.budget_limit }} monthly budget
+                            </small>
+                            <div class="progress" role="progressbar" aria-label="Budget used"
+                                 aria-valuenow="{{ dashboard_data.budget_percentage }}"
+                                 aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: {{ dashboard_data.budget_bar_percentage }}%"></div>
+                            </div>
+                            <small class="text-body-secondary">{{ dashboard_data.budget_percentage }}% used</small>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="card dashboard-card shadow-sm border-0 mb-4" aria-labelledby="transactions-heading">
+            <div class="card-header bg-white border-0 p-4 pb-2">
+                <p class="section-kicker mb-1">Activity</p>
+                <h2 class="h4 mb-0" id="transactions-heading">Recent Transactions</h2>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Category / Source</th>
+                                <th scope="col" class="text-end">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transaction in dashboard_data.transactions %}
+                                <tr>
+                                    <td>{{ transaction.date }}</td>
+                                    <td>{{ transaction.type }}</td>
+                                    <td>{{ transaction.category }}</td>
+                                    <td class="text-end">{{ transaction.amount }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="empty-state text-center">
+                                        <div class="empty-state-icon" aria-hidden="true">↔</div>
+                                        <p class="fw-semibold mb-1">No transactions found.</p>
+                                        <small class="text-body-secondary">
+                                            Your latest income and expenses will appear here.
+                                        </small>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-4" aria-labelledby="analytics-heading">
+            <div class="mb-3">
+                <p class="section-kicker mb-1">Analytics</p>
+                <h2 class="h4 mb-0" id="analytics-heading">Financial trends</h2>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <article class="card dashboard-card chart-card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="h6 fw-bold mb-3">Income vs Expense</h3>
+                            <div class="chart-shell">
+                                <canvas id="incomeExpenseChart" aria-label="Income vs Expense chart"></canvas>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="card dashboard-card chart-card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="h6 fw-bold mb-3">Expense Categories</h3>
+                            <div class="chart-shell">
+                                <canvas id="expenseCategoriesChart" aria-label="Expense Categories chart"></canvas>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="card dashboard-card chart-card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="h6 fw-bold mb-3">Monthly Spending</h3>
+                            <div class="chart-shell">
+                                <canvas id="monthlySpendingChart" aria-label="Monthly Spending chart"></canvas>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-6">
+                    <article class="card dashboard-card chart-card h-100 shadow-sm border-0">
+                        <div class="card-body p-4">
+                            <h3 class="h6 fw-bold mb-3">Weekly Spending</h3>
+                            <div class="chart-shell">
+                                <canvas id="weeklySpendingChart" aria-label="Weekly Spending chart"></canvas>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="card advisor-card shadow-sm border-0" aria-labelledby="advisor-heading">
+            <div class="card-body p-4 p-lg-5">
+                <div class="row align-items-center g-3">
+                    <div class="col-auto">
+                        <div class="advisor-icon" aria-hidden="true">✦</div>
+                    </div>
+                    <div class="col">
+                        <p class="section-kicker mb-1">AI insights</p>
+                        <h2 class="h4 mb-1" id="advisor-heading">AI Budget Advisor</h2>
+                        <p class="text-body-secondary mb-0">
+                            Get personalized budget guidance based on your income, expenses, and budget.
+                        </p>
+                    </div>
+                    <div class="col-lg-auto">
+                        <a class="btn btn-primary" href="{{ url_for('ai.index') }}">Open Advisor</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+    <script id="dashboard-chart-data" type="application/json">
+        {{ dashboard_data.chart_data | tojson }}
+    </script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

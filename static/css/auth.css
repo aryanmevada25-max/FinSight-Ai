@@ -1,0 +1,13 @@
+.auth-section {
+    background: linear-gradient(180deg, #f8f9fa 0%, #eef3ff 100%);
+}
+
+.auth-card {
+    max-width: 520px;
+    border: 0;
+    border-radius: 1rem;
+}
+
+.auth-card .form-control {
+    min-height: 46px;
+}

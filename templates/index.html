@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}FinSight AI | Smarter Personal Finance{% endblock %}
+
+{% block content %}
+<section class="py-5 py-lg-6">
+    <div class="container">
+        <div class="row align-items-center g-5 min-vh-75">
+            <div class="col-lg-7 text-center text-lg-start">
+                <span class="badge rounded-pill text-bg-primary px-3 py-2 mb-3">
+                    AI-powered personal finance
+                </span>
+                <h1 class="display-3 fw-bold lh-sm mb-3">
+                    See your money clearly with <span class="text-primary">FinSight AI</span>
+                </h1>
+                <p class="lead text-body-secondary mb-4">
+                    Track income and expenses, understand your budget, and turn your
+                    financial data into practical next steps.
+                </p>
+                <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start gap-3">
+                    {% if current_user.is_authenticated %}
+                        <a class="btn btn-primary btn-lg px-4" href="{{ url_for('dashboard.index') }}">
+                            Open dashboard
+                        </a>
+                    {% else %}
+                        <a class="btn btn-primary btn-lg px-4" href="{{ url_for('auth.register') }}">
+                            Get started
+                        </a>
+                        <a class="btn btn-outline-dark btn-lg px-4" href="{{ url_for('auth.login') }}">
+                            Log in
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-5 text-center">
+                <img class="home-brand-logo img-fluid"
+                     src="{{ url_for('static', filename='images/finsight-ai-logo.png') }}"
+                     alt="FinSight AI — Track, Analyze, Save, Grow">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

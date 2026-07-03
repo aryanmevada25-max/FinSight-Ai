@@ -1,0 +1,20 @@
+# Environment and editor files
+.env
+.vscode/
+.DS_Store
+
+# Python
+venv/
+.venv/
+frontend/node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local application data
+instance/*.db
+static/uploads/
+uploads/
+
+# Generated files
+*.log

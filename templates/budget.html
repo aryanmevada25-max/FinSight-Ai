@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Budget | FinSight AI{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/budget.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="budget-page py-4 py-lg-5">
+    <div class="container">
+        <header class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3 mb-4">
+            <div>
+                <p class="page-eyebrow mb-1">Monthly planning</p>
+                <h1 class="display-6 fw-bold mb-1">Budget</h1>
+                <p class="text-body-secondary mb-0">
+                    Set a monthly spending limit and monitor your progress.
+                </p>
+            </div>
+            <a class="btn btn-outline-dark" href="{{ url_for('dashboard.index') }}">
+                Back to Dashboard
+            </a>
+        </header>
+
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <section class="card budget-form-card border-0 shadow-sm h-100" aria-labelledby="budget-form-heading">
+                    <div class="card-body p-4 p-lg-5">
+                        <div class="budget-icon mb-3" aria-hidden="true">%</div>
+                        <h2 class="h4 fw-bold mb-2" id="budget-form-heading">Monthly budget</h2>
+                        <p class="text-body-secondary mb-4">
+                            This is your overall monthly expense budget. You can update it anytime.
+                        </p>
+
+                        <form method="post" action="{{ url_for('budget.index') }}" novalidate>
+                            {{ form.hidden_tag() }}
+                            <div class="mb-3">
+                                {{ form.monthly_budget.label(class="form-label") }}
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text">₹</span>
+                                    {{ form.monthly_budget(
+                                        class="form-control" ~ (" is-invalid" if form.monthly_budget.errors else ""),
+                                        min="0",
+                                        step="0.01",
+                                        placeholder="0.00"
+                                    ) }}
+                                    {% for error in form.monthly_budget.errors %}
+                                        <div class="invalid-feedback">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-text">
+                                    Enter 0 if you do not want to track budget progress yet.
+                                </div>
+                            </div>
+                            {{ form.submit(class="btn btn-primary btn-lg w-100") }}
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-7">
+                <section class="card budget-progress-card border-0 shadow-sm h-100" aria-labelledby="budget-progress-heading">
+                    <div class="card-body p-4 p-lg-5">
+                        <p class="page-eyebrow mb-1">This month</p>
+                        <h2 class="h4 fw-bold mb-4" id="budget-progress-heading">Budget progress</h2>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-4">
+                                <div class="metric-box">
+                                    <span>Budget</span>
+                                    <strong>{{ format_currency(current_user.monthly_budget or 0) }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="metric-box">
+                                    <span>Spent</span>
+                                    <strong>{{ format_currency(progress.spent) }}</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="metric-box">
+                                    <span>Remaining</span>
+                                    <strong class="{% if progress.remaining < 0 %}text-danger{% endif %}">
+                                        {{ format_currency(progress.remaining) }}
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress budget-progress mb-2" role="progressbar"
+                             aria-label="Monthly budget used"
+                             aria-valuenow="{{ progress.percentage }}"
+                             aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar {% if progress.percentage > 100 %}bg-danger{% endif %}"
+                                 style="width: {{ progress.bar_percentage }}%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between text-body-secondary small">
+                            <span>{{ progress.percentage }}% used</span>
+                            <span>Updates as expenses are added</span>
+                        </div>
+
+                        {% if not current_user.monthly_budget or current_user.monthly_budget == 0 %}
+                            <div class="alert alert-info mt-4 mb-0">
+                                Set a monthly budget to activate progress tracking on your dashboard.
+                            </div>
+                        {% elif progress.percentage > 100 %}
+                            <div class="alert alert-warning mt-4 mb-0">
+                                You are over your monthly budget. Review recent expenses to rebalance.
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success mt-4 mb-0">
+                                Your monthly budget tracking is active.
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

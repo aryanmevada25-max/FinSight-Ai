@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Income | FinSight AI{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/income.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="income-page py-4 py-lg-5">
+    <div class="container">
+        <header class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3 mb-4">
+            <div>
+                <p class="page-eyebrow mb-1">Money in</p>
+                <h1 class="display-6 fw-bold mb-1">Income</h1>
+                <p class="text-body-secondary mb-0">Track every source of money you receive.</p>
+            </div>
+            <a class="btn btn-success btn-lg px-4" href="{{ url_for('income.create') }}">
+                <span aria-hidden="true">＋</span> Add Income
+            </a>
+        </header>
+
+        <section class="card income-summary-card border-0 shadow-sm mb-4">
+            <div class="card-body p-4 p-lg-5">
+                <div class="row align-items-center g-3">
+                    <div class="col-auto">
+                        <div class="summary-icon" aria-hidden="true">↑</div>
+                    </div>
+                    <div class="col">
+                        <p class="mb-1 text-white-50 fw-semibold">Total income</p>
+                        <p class="display-5 fw-bold mb-1">{{ total_income }}</p>
+                        <small class="text-white-50">
+                            {{ incomes|length }} entr{% if incomes|length == 1 %}y{% else %}ies{% endif %} recorded
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card income-list-card border-0 shadow-sm" aria-labelledby="income-history-heading">
+            <div class="card-header bg-white border-0 p-4 pb-3">
+                <h2 class="h5 mb-0" id="income-history-heading">Income history</h2>
+            </div>
+            {% if incomes %}
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Source</th>
+                                <th scope="col">Description</th>
+                                <th scope="col" class="text-end">Amount</th>
+                                <th scope="col" class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in incomes %}
+                                <tr>
+                                    <td class="text-nowrap">{{ record.income_date.strftime("%d %b %Y") }}</td>
+                                    <td><span class="source-badge">{{ record.source }}</span></td>
+                                    <td class="description-cell">{{ record.description or "—" }}</td>
+                                    <td class="text-end fw-bold text-success text-nowrap">+₹{{ "{:,.2f}".format(record.amount) }}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-end gap-2">
+                                            <a class="btn btn-sm btn-outline-primary"
+                                               href="{{ url_for('income.edit', income_id=record.id) }}">
+                                                Edit
+                                            </a>
+                                            <form method="post"
+                                                  action="{{ url_for('income.delete', income_id=record.id) }}"
+                                                  onsubmit="return confirm('Delete this income entry?');">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="income-empty-state text-center px-4 py-5">
+                    <div class="empty-icon mx-auto mb-3" aria-hidden="true">↗</div>
+                    <h3 class="h5">No income recorded yet.</h3>
+                    <p class="text-body-secondary mb-3">
+                        Add your first income entry to start tracking your balance.
+                    </p>
+                    <a class="btn btn-success" href="{{ url_for('income.create') }}">Add Income</a>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{% endblock %}

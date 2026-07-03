@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}AI Budget Advisor | FinSight AI{% endblock %}
+
+{% block content %}
+<section class="container py-4 py-lg-5">
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4 p-lg-5">
+                    <p class="text-primary fw-bold text-uppercase small mb-2">AI insights</p>
+                    <h1 class="h2 fw-bold mb-3">AI Budget Advisor</h1>
+                    <p class="text-body-secondary">
+                        Personalized guidance based on your saved income, expenses, and monthly budget.
+                    </p>
+                    <div class="alert alert-info mb-0">
+                        Advice source: <strong>{{ advisor.provider }}</strong>
+                        {% if not advisor.used_gemini %}
+                            <br><small>Set <code>GEMINI_API_KEY</code> to enable Gemini responses.</small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h2 class="h5 fw-bold mb-3">Advisor recommendations</h2>
+                    <ol class="list-group list-group-numbered">
+                        {% for item in advisor.advice %}
+                            <li class="list-group-item border-0 px-0">{{ item }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="h5 fw-bold mb-3">Financial context used</h2>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <small class="text-body-secondary">Monthly income</small>
+                                <div class="fw-bold">{{ format_currency(summary.monthly_income) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <small class="text-body-secondary">Monthly expenses</small>
+                                <div class="fw-bold">{{ format_currency(summary.monthly_expenses) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <small class="text-body-secondary">Monthly budget</small>
+                                <div class="fw-bold">{{ format_currency(summary.monthly_budget) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <small class="text-body-secondary">Budget used</small>
+                                <div class="fw-bold">{{ summary.budget_percentage }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
