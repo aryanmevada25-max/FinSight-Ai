@@ -1,20 +1,56 @@
-# Environment and editor files
-.env
-.vscode/
-.DS_Store
-
+# -----------------------------
 # Python
+# -----------------------------
 venv/
 .venv/
-frontend/node_modules/
+env/
+ENV/
+
 __pycache__/
 *.py[cod]
-.pytest_cache/
+*.pyo
 
-# Local application data
-instance/*.db
-static/uploads/
-uploads/
+# -----------------------------
+# Environment variables
+# -----------------------------
+.env
 
-# Generated files
+# -----------------------------
+# Database
+# -----------------------------
+instance/
+*.db
+*.sqlite3
+
+# -----------------------------
+# Logs
+# -----------------------------
 *.log
+
+# -----------------------------
+# macOS
+# -----------------------------
+.DS_Store
+
+# -----------------------------
+# VS Code
+# -----------------------------
+.vscode/
+
+# -----------------------------
+# Frontend (Node.js)
+# -----------------------------
+frontend/node_modules/
+frontend/dist/
+
+# -----------------------------
+# Testing
+# -----------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+
+# -----------------------------
+# Git
+# -----------------------------
+.gitignore
